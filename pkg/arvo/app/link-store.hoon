@@ -103,6 +103,12 @@
         ::TODO  move json conversion into mark once mark performance improves
         %json         (do-action:do (action:de-json !<(json vase)))
         %link-action  (do-action:do !<(action vase))
+          %noun
+        =+  !<(%import vase)
+        :-  ~
+        ;;  state-0
+        %-  cue
+        .^(@ %cx /(scot %p our.bowl)/home/(scot %da now.bowl)/link/atom)
       ==
     [cards this]
   ::
@@ -110,6 +116,9 @@
     |=  =path
     ^-  (unit (unit cage))
     ?+  path  (on-peek:def path)
+        [%x %export ~]
+      ``atom+!>((jam state))
+    ::
         [%y ?(%local-pages %submissions) ~]
       ``noun+!>(~(key by by-group))
     ::
