@@ -1289,6 +1289,22 @@ _pier_on_lord_slog(void* ptr_v, c3_w pri_w, u3_noun tan)
   u3_pier_tank(0, pri_w, tan);
 }
 
+/* _pier_on_lord_flog(): debug printf from worker.
+*/
+static void
+_pier_on_lord_flog(void *ptr_v, u3_atom dat)
+{
+  u3_pier *pir_u = ptr_v;
+
+  c3_c *tan_c = u3r_string(dat);
+  u3C.stderr_log_f(tan_c);
+  c3_free(tan_c);
+
+  if ( 0 != pir_u->sog_f ) {
+    pir_u->sog_f(pir_u->sop_p, 0, u3k(dat));
+  }
+}
+
 /* _pier_on_lord_save(): worker (non-portable) snapshot complete.
 */
 static void
@@ -1555,6 +1571,7 @@ _pier_init(c3_w wag_w, c3_c* pax_c)
       .spin_f = _pier_on_lord_work_spin,
       .spun_f = _pier_on_lord_work_spun,
       .slog_f = _pier_on_lord_slog,
+      .flog_f = _pier_on_lord_flog,
       .play_done_f = _pier_on_lord_play_done,
       .play_bail_f = _pier_on_lord_play_bail,
       .work_done_f = _pier_on_lord_work_done,

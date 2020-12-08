@@ -366,20 +366,11 @@ _lord_plea_slog(u3_lord* god_u, u3_noun dat)
 static void
 _lord_plea_flog(u3_lord* god_u, u3_noun dat)
 {
-  u3_pier* pir_u = god_u->cb_u.ptr_v;
-
   if ( c3n == u3a_is_atom(dat) ) {
     return _lord_plea_foul(god_u, c3__flog, dat);
   }
 
-  c3_c* tan_c = u3r_string(dat);
-  u3C.stderr_log_f(tan_c);
-  c3_free(tan_c);
-
-  if ( 0 != pir_u->sog_f ) {
-    pir_u->sog_f(pir_u->sop_p, 0, u3k(dat));
-  }
-  u3z(dat);
+  god_u->cb_u.flog_f(god_u->cb_u.ptr_v, dat);
 }
 
 /* _lord_plea_peek_bail(): hear serf %peek %bail

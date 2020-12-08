@@ -446,6 +446,7 @@
           void* ptr_v;
           void (*live_f)(void*);
           void (*slog_f)(void*, c3_w, u3_noun);
+          void (*flog_f)(void*, u3_atom);
           void (*spin_f)(void*, u3_atom, c3_o);
           void (*spun_f)(void*);
           void (*play_done_f)(void*, u3_info, c3_l mug_l);
