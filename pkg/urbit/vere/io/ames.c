@@ -289,10 +289,6 @@ _ames_etch_head(u3_head* hed_u, c3_y buf_y[4])
              ^ ((hed_u->mug_l & 0xfffff) << 11)
              ^ ((hed_u->rel_o &     0x1) << 31);
 
-  //  only version 0 currently recognized
-  //
-  c3_assert( 0 == hed_u->ver_y );  //  XX remove after testing
-
   buf_y[0] = hed_w & 0xff;
   buf_y[1] = (hed_w >>  8) & 0xff;
   buf_y[2] = (hed_w >> 16) & 0xff;
