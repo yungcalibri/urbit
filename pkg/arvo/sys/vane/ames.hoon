@@ -88,7 +88,7 @@
 ::  protocol-version: current version of the ames wire protocol
 ::
 !:
-=/  protocol-version=?(%0 %1 %2 %3 %4 %5 %6 %7)  %0
+=/  protocol-version=?(%0 %1 %2 %3 %4 %5 %6 %7)  %1
 =,  ames
 =*  point               point:jael
 =*  public-keys-result  public-keys-result:jael
