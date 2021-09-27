@@ -1547,7 +1547,7 @@
             ::
             lib=(list cable:clay)
         ==
-        var=(map term cage)                           ::  variable state
+        var=(map term *)                              ::  variable state
         old=(set term)                                ::  used TLVs
         buf=tape                                      ::  multiline buffer
     ==                                                ::
@@ -1557,7 +1557,7 @@
   ++  session-6-to-7
     |=  old=session-6
     ~?  ?=(^ poy.old)  [dap.hid %cancelling-for-load]
-    old(poy ~, -.dir [our.hid %base ud+0])
+    old(poy ~, var ~, -.dir [our.hid %base ud+0])
   ::
   +$  house-5
     [%5 egg=@u hoc=(map id session)]
