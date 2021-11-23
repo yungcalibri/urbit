@@ -1,4 +1,4 @@
-::  |pill: helper functions for making pills
+::  |pill: helper functions for making pills & bootstrap events
 ::
 ^?
 |%
@@ -321,5 +321,14 @@
     |.  ~+
     =/  pro  q:$:tap
     [[%cell p.gun p:$:tap] [.*(pro q.gun) pro]]
+  --
+::
+++  events
+  |%
+  +$  prop  [%prop rank (list unix-event)]
+  +$  rank  ?(%post-kernel %pre-userspace %post-userspace)
+  ::
+  ++  desk
+    %pre-userspace
   --
 --

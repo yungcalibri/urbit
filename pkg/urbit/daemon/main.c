@@ -126,6 +126,9 @@ _main_getopt(c3_i argc, c3_c** argv)
     { "exit",                no_argument,       NULL, 'x' },
     { "scry-into",           required_argument, NULL, 'Y' },
     { "scry-format",         required_argument, NULL, 'Z' },
+    //
+    { "append-userspace", required_argument, NULL, 1 },
+    //
     { NULL, 0, NULL, 0 },
   };
 
@@ -134,6 +137,15 @@ _main_getopt(c3_i argc, c3_c** argv)
                  lop_u, &lid_i)) )
   {
     switch ( ch_i ) {
+      case 1: {  //  append-userspace
+        printf("hit!\n");
+        u3_even* nex_u = c3_calloc(sizeof(*nex_u));
+        nex_u->loc_c = strdup(optarg);
+        nex_u->pre_u = u3_Host.ops_u.vex_u;
+        u3_Host.ops_u.vex_u = nex_u;
+        printf("settem %d\n", u3_Host.ops_u.vex_u);
+        break;
+      }
       case 'X': {
         u3_Host.ops_u.pek_c = strdup(optarg);
         break;
@@ -248,9 +260,7 @@ _main_getopt(c3_i argc, c3_c** argv)
       case 's': { u3_Host.ops_u.git = c3y; break; }
       case 'S': { u3_Host.ops_u.has = c3y; break; }
       case 't': { u3_Host.ops_u.tem = c3y; break; }
-      case '?': default: {
-        return c3n;
-      }
+      case '?': default: { return c3n; }
     }
   }
 
@@ -391,6 +401,18 @@ _main_getopt(c3_i argc, c3_c** argv)
     if ( stat(u3_Host.ops_u.pil_c, &s) != 0 ) {
       fprintf(stderr, "pill %s not found\n", u3_Host.ops_u.pil_c);
       return c3n;
+    }
+  }
+
+  if ( u3_Host.ops_u.vex_u != 0 ) {
+    struct stat s;
+    u3_even* vex_u = u3_Host.ops_u.vex_u;
+    while ( vex_u != 0 ) {
+      if ( stat(vex_u->loc_c, &s) != 0 ) {
+        fprintf(stderr, "events %s not found\n", vex_u->loc_c);
+        return c3n;
+      }
+      vex_u = vex_u->pre_u;
     }
   }
 

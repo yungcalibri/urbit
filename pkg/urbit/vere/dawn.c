@@ -113,7 +113,7 @@ _dawn_post_json(c3_c* url_c, uv_buf_t lod_u)
 /* _dawn_get_jam(): GET a jammed noun from url_c
 */
 static u3_noun
-_dawn_get_jam(c3_c* url_c)
+_dawn_get_jam(c3_c* url_c) //  xx use me
 {
   CURL *curl;
   CURLcode result;
