@@ -325,10 +325,18 @@
 ::
 ++  events
   |%
-  +$  prop  [%prop rank (list unix-event)]
-  +$  rank  ?(%post-kernel %pre-userspace %post-userspace)
+  +$  prop  [%prop meta tier (list ovum)]
+  +$  meta  term
+  +$  tier  ?(%pre-userspace %post-userspace)
   ::
-  ++  desk
-    %pre-userspace
+  ++  install
+    |=  [as=desk =beak]
+    ^-  prop
+    :^  %prop  %install  %post-userspace
+    ::TODO  but this will exclude things not in :directories? ie /docket
+    :~  (file-ovum as (en-beam beak /))
+      ::
+        [/d/install/[as] [%seat as]]
+    ==
   --
 --
