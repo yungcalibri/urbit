@@ -127,7 +127,9 @@ _main_getopt(c3_i argc, c3_c** argv)
     { "scry-into",           required_argument, NULL, 'Y' },
     { "scry-format",         required_argument, NULL, 'Z' },
     //
-    { "append-userspace", required_argument, NULL, 1 },
+    { "prop-file",           required_argument, NULL, 1 },
+    { "prop-url",            required_argument, NULL, 2 },
+    { "prop-name",           required_argument, NULL, 3 },
     //
     { NULL, 0, NULL, 0 },
   };
@@ -137,13 +139,13 @@ _main_getopt(c3_i argc, c3_c** argv)
                  lop_u, &lid_i)) )
   {
     switch ( ch_i ) {
-      case 1: {  //  append-userspace
+      case 1: case 2: case 3: {  //  prop-*
         printf("hit!\n");
         u3_even* nex_u = c3_calloc(sizeof(*nex_u));
+        nex_u->kin_i = ch_i;
         nex_u->loc_c = strdup(optarg);
         nex_u->pre_u = u3_Host.ops_u.vex_u;
         u3_Host.ops_u.vex_u = nex_u;
-        printf("settem %d\n", u3_Host.ops_u.vex_u);
         break;
       }
       case 'X': {
@@ -408,8 +410,8 @@ _main_getopt(c3_i argc, c3_c** argv)
     struct stat s;
     u3_even* vex_u = u3_Host.ops_u.vex_u;
     while ( vex_u != 0 ) {
-      if ( stat(vex_u->loc_c, &s) != 0 ) {
-        fprintf(stderr, "events %s not found\n", vex_u->loc_c);
+      if ( vex_u->kin_i == 1 && stat(vex_u->loc_c, &s) != 0 ) {
+        fprintf(stderr, "events file %s not found\n", vex_u->loc_c);
         return c3n;
       }
       vex_u = vex_u->pre_u;

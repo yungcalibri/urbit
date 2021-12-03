@@ -260,6 +260,7 @@
     /* u3_even: event specifier
     */
      typedef struct _u3_even {
+       c3_i             kin_i;
        c3_c*            loc_c;
        struct _u3_even* pre_u;
      } u3_even;
