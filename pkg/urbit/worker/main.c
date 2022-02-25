@@ -7,7 +7,6 @@
 #include <vere/vere.h>
 #include <vere/mars.h>
 #include <vere/serf.h>
-#include <vere/db/lmdb.h>
 
 #include "ur/hashcons.h"
 
@@ -15,7 +14,6 @@ static u3_serf        u3V;             //  one serf per process
 static u3_moat      inn_u;             //  input stream
 static u3_mojo      out_u;             //  output stream
 static u3_cue_xeno* sil_u;             //  cue handle
-static u3_disk*     log_u;
 
 #undef SERF_TRACE_JAM
 #undef SERF_TRACE_CUE
@@ -276,7 +274,7 @@ _cw_serf_commence(c3_i argc, c3_c* argv[])
   //
   {
     u3V.dir_c = strdup(dir_c);
-    u3V.sen_d = u3V.dun_d = u3m_boot(dir_c);
+    u3V.sen_d = u3V.dun_d = u3m_boot(dir_c, u3e_live);
 
     if ( eve_d ) {
       //  XX need not be fatal, need a u3m_reboot equivalent
@@ -330,7 +328,7 @@ _cw_info(c3_i argc, c3_c* argv[])
   c3_assert( 3 <= argc );
 
   c3_c* dir_c = argv[2];
-  c3_d  eve_d = u3m_boot(dir_c);
+  c3_d  eve_d = u3m_boot(dir_c, u3e_live);
 
   fprintf(stderr, "urbit-worker: %s at event %" PRIu64 "\r\n", dir_c, eve_d);
   u3m_stop();
@@ -344,7 +342,7 @@ _cw_grab(c3_i argc, c3_c* argv[])
   c3_assert( 3 <= argc );
 
   c3_c* dir_c = argv[2];
-  u3m_boot(dir_c);
+  u3m_boot(dir_c, u3e_live);
   u3C.wag_w |= u3o_hashless;
   u3_serf_grab();
   u3m_stop();
@@ -358,7 +356,7 @@ _cw_cram(c3_i argc, c3_c* argv[])
   c3_assert( 3 <= argc );
 
   c3_c* dir_c = argv[2];
-  c3_d  eve_d = u3m_boot(dir_c);
+  c3_d  eve_d = u3m_boot(dir_c, u3e_live);
   c3_o  ret_o;
 
   fprintf(stderr, "urbit-worker: cram: preparing\r\n");
@@ -401,7 +399,7 @@ _cw_queu(c3_i argc, c3_c* argv[])
 
     memset(&u3V, 0, sizeof(u3V));
     u3V.dir_c = strdup(dir_c);
-    u3V.sen_d = u3V.dun_d = u3m_boot(dir_c);
+    u3V.sen_d = u3V.dun_d = u3m_boot(dir_c, u3e_live);
 
     //  XX can spuriously fail due to corrupt memory-image checkpoint,
     //  need a u3m_half_boot equivalent
@@ -429,7 +427,7 @@ _cw_meld(c3_i argc, c3_c* argv[])
   c3_c* dir_c = argv[2];
 
   u3C.wag_w |= u3o_hashless;
-  u3m_boot(dir_c);
+  u3m_boot(dir_c, u3e_live);
 
   u3_serf_grab();
 
@@ -449,7 +447,7 @@ _cw_pack(c3_i argc, c3_c* argv[])
 
   c3_c* dir_c = argv[2];
 
-  u3m_boot(dir_c);
+  u3m_boot(dir_c, u3e_live);
   u3a_print_memory(stderr, "urbit-worker: pack: gained", u3m_pack());
 
   u3e_save();
@@ -590,7 +588,7 @@ _cw_boot(c3_i argc, c3_c* argv[])
     //   }
     // }
 
-    u3V.sen_d = u3V.dun_d = u3m_boot(dir_c);
+    u3V.sen_d = u3V.dun_d = u3m_boot(dir_c, u3e_live);
   }
 
   //  set up logging
@@ -711,7 +709,7 @@ _cw_work(c3_i argc, c3_c* argv[])
 
   //  setup loom XX strdup?
   //
-  u3m_boot(dir_c);
+  u3m_boot(dir_c, u3e_live);
 
   //  set up logging
   //

@@ -14,7 +14,6 @@
 #include <openssl/ssl.h>
 #include <h2o.h>
 #include <curl/curl.h>
-#include <vere/db/lmdb.h>
 #include <getopt.h>
 
 #include "ca-bundle.h"
@@ -705,6 +704,7 @@ _stop_on_boot_completed_cb()
 static c3_i
 _debug_db_stats(const c3_c* dir_c)
 {
+#if 0
 #if defined(U3_CPU_aarch64) && defined(U3_OS_linux)
   const size_t siz_i = 64424509440;
 #else
@@ -726,6 +726,9 @@ _debug_db_stats(const c3_c* dir_c)
   else {
     return 1;
   }
+#endif
+  // TODO(peter): re-implement in epoch scheme.
+  return 0;
 }
 
 c3_i
