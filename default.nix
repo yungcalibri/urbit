@@ -65,7 +65,13 @@ let
   };
 
   # Use nixpkgs' top-level/static overlay if enableStatic = true.
-  pkgsStatic = if enableStatic then pkgsCross.pkgsStatic else pkgsCross;
+  pkgsStaticTop = if enableStatic then pkgsCross.pkgsStatic else pkgsCross;
+
+  pkgsStatic = pkgsStaticTop // {
+    stdenv = if pkgsStaticTop.stdenv.isDarwin
+             then pkgsStaticTop.llvmPackages_9.stdenv
+             else pkgsStaticTop.stdenv;
+  };
 
   # Enrich the global package set with our local functions and packages.
   # Cross vs static build dependencies can be selectively overridden for
