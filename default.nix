@@ -46,9 +46,11 @@ let
 
   pkgsTopLevel = import ./nix/default.nix { inherit system; };
 
-  pkgsNative = if pkgsTopLevel.stdenv.isDarwin
-               then pkgsTopLevel.llvmPackages_9
-               else pkgsTopLevel;
+  pkgsNative = pkgsTopLevel // {
+    stdenv = if pkgsTopLevel.stdenv.isDarwin
+             then pkgsTopLevel.llvmPackages_9.stdenv
+             else pkgsTopLevel.stdenv;
+  };
 
   pkgsCross = import ./nix/default.nix {
     inherit system sources config overlays crossOverlays;
