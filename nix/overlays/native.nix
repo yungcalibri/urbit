@@ -33,6 +33,6 @@ in {
         ../pkgs/lmdb/darwin-fsync.patch
       ];
   });
-} // prev.lib.optionalAttrs prev.stdenv.isDarwin {
-  stdenv = prev.llvmPackages_9.prev.stdenv;
+
+  stdenv = if prev.stdenv.isDarwin then prev.llvmPackages_9.stdenv else prev.stdenv;
 }
