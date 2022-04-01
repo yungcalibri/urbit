@@ -43,6 +43,7 @@ on:
       - 'pkg/urbit/**'
       - 'bin/**'
       - 'nix/**'
+      - default.nix
   pull_request:
     paths:
       - 'pkg/arvo/**'
@@ -53,6 +54,7 @@ on:
       - 'pkg/urbit/**'
       - 'bin/**'
       - 'nix/**'
+      - default.nix
 
 jobs:
   urbit:
