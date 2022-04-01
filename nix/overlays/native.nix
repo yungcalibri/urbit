@@ -33,6 +33,4 @@ in {
         ../pkgs/lmdb/darwin-fsync.patch
       ];
   });
-
-  stdenv = if prev.stdenv.isDarwin then prev.llvmPackages_9.stdenv else prev.stdenv;
 }

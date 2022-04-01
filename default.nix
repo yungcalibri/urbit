@@ -44,6 +44,8 @@
 
 let
 
+  stdenv = pkgs.llvmPackages_9.stdenv;
+
   pkgsNative = import ./nix/default.nix { inherit system; };
 
   pkgsCross = import ./nix/default.nix {
