@@ -33,6 +33,4 @@ in {
         ../pkgs/lmdb/darwin-fsync.patch
       ];
   });
-
-
 }
