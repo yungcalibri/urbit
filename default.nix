@@ -44,8 +44,6 @@
 
 let
 
-  stdenv = pkgs.llvmPackages_9.stdenv;
-
   pkgsNative = import ./nix/default.nix { inherit system; };
 
   pkgsCross = import ./nix/default.nix {
@@ -75,6 +73,8 @@ let
   # Local vendored packages defined in ./pkg.
   # For non-vendored nixpkgs specific package overrides, see ./nix/overlays.
   pkgsLocal = {
+    stdenv = pkgsNative.llvmPackages_9.stdenv;
+
     ca-bundle = callPackage ./nix/pkgs/ca-bundle { };
 
     ent = callPackage ./nix/pkgs/ent { };
