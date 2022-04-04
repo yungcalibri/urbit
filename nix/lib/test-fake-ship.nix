@@ -29,13 +29,15 @@ stdenvNoCC.mkDerivation {
     port=$(cat ./pier/.http.ports | grep loopback | tr -s ' ' '\n' | head -n 1)
 
     lensd() {
-      curl -f -s                                                           \
+      # -f elided, this can server-side timeouts
+      curl -s                                                              \
         --data "{\"source\":{\"dojo\":\"$1\"},\"sink\":{\"stdout\":null}}" \
         "http://localhost:$port" | xargs printf %s | sed 's/\\n/\n/g'
     }
 
     lensa() {
-      curl -f -s                                                           \
+      # -f elided, this can server-side timeouts
+      curl -s                                                              \
         --data "{\"source\":{\"dojo\":\"$2\"},\"sink\":{\"app\":\"$1\"}}"  \
         "http://localhost:$port" | xargs printf %s | sed 's/\\n/\n/g'
     }
