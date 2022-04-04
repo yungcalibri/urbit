@@ -186,6 +186,4 @@ stdenvNoCC.mkDerivation {
   # Fix 'bind: operation not permitted' when nix.useSandbox = true on darwin.
   # See https://github.com/NixOS/nix/blob/5f6840fbb49ae5b534423bd8a4360646ee93dbaf/src/libstore/build.cc#L2961
   __darwinAllowLocalNetworking = true;
-
-  meta = { platforms = [ "x86_64-linux" ]; };
 }
